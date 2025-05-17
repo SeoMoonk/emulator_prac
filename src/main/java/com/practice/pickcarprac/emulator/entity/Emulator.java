@@ -26,4 +26,18 @@ public class Emulator {
         this.code = code;
         this.isRunning = false;
     }
+
+    public void turnOn(Emulator emulator) {
+        if (emulator.isRunning) {
+            throw new IllegalStateException("애뮬레이터가 이미 켜져 있습니다.");
+        }
+        emulator.isRunning = true;
+    }
+
+    public void turnOff(Emulator emulator) {
+        if (!emulator.isRunning) {
+            throw new IllegalStateException("애뮬레이터가 이미 꺼져 있습니다.");
+        }
+        emulator.isRunning = false;
+    }
 }
