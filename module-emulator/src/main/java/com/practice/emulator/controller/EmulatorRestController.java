@@ -30,7 +30,7 @@ public class EmulatorRestController {
         //Todo: step2. 주기 데이터를 전달받음
 
         for(Gps gps : gpses) {
-            System.out.printf("(%d, %d) \t", gps.getLatitude(), gps.getLongitude());
+            System.out.printf("(%.6f, %.6f) \t", gps.getLatitude(), gps.getLongitude());
         }
 
         System.out.println();
