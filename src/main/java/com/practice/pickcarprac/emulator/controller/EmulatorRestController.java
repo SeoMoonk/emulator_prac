@@ -1,19 +1,17 @@
 package com.practice.pickcarprac.emulator.controller;
 
 import com.practice.pickcarprac.emulator.service.EmulatorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/emulator")
+@RequiredArgsConstructor
 public class EmulatorRestController {
 
     private final EmulatorService emulatorService;
-
-    public EmulatorRestController(EmulatorService emulatorService) {
-        this.emulatorService = emulatorService;
-    }
 
     @PostMapping("/on")
     public void on() {
