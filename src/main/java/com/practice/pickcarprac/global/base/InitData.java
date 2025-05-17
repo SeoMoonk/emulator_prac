@@ -1,6 +1,6 @@
 package com.practice.pickcarprac.global.base;
 
-import com.practice.pickcarprac.emulator.entity.Emulator;
+import com.practice.pickcarprac.emulator.model.entity.Emulator;
 import com.practice.pickcarprac.emulator.repository.EmulatorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;

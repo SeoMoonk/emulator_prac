@@ -1,16 +1,19 @@
 package com.practice.pickcarprac.emulator.service;
 
-import com.practice.pickcarprac.emulator.entity.Emulator;
+import com.practice.pickcarprac.emulator.model.entity.Emulator;
 import com.practice.pickcarprac.emulator.repository.EmulatorRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class EmulatorService {
 
     private final EmulatorRepository emulatorRepository;
@@ -33,6 +36,7 @@ public class EmulatorService {
     }
 
     private Emulator getById(Long emulatorId) {
+        //todo: fix to stream
         Optional<Emulator> maybeEmulator = emulatorRepository.findById(emulatorId);
 
         if (maybeEmulator.isEmpty()) {
@@ -40,5 +44,11 @@ public class EmulatorService {
         }
 
         return maybeEmulator.get();
+    }
+
+    public List<Long> getRunningIds() {
+        return emulatorRepository.findAllByIsRunningTrue().stream()
+                .map(Emulator::getId)
+                .toList();
     }
 }

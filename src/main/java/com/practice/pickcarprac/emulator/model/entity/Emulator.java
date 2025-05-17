@@ -1,4 +1,4 @@
-package com.practice.pickcarprac.emulator.entity;
+package com.practice.pickcarprac.emulator.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

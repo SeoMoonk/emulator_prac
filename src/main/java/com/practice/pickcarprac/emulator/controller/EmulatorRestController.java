@@ -1,13 +1,14 @@
 package com.practice.pickcarprac.emulator.controller;
 
+import com.practice.pickcarprac.emulator.model.entity.Gps;
 import com.practice.pickcarprac.emulator.service.EmulatorService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -16,19 +17,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmulatorRestController {
 
     private final EmulatorService emulatorService;
+    private final EmulatorEventScheduler emulatorEventScheduler;
 
     @PostMapping("/on/{emulatorId}")
-    public ResponseEntity<String> on(@PathVariable(value = "emulatorId") Long emulatorId) {
+    public ResponseEntity<String> on(@PathVariable(value = "emulatorId") Long emulatorId, HttpServletRequest request) {
         log.info("On => input emulatorId: {}", emulatorId);
         emulatorService.turnOn(emulatorId);
-        //todo: 스케줄러 시작
-
         return ResponseEntity.ok("%d번 애뮬레이터가 동작하기 시작합니다.".formatted(emulatorId));
     }
 
     @PostMapping("/receive")
-    public void receive() {
+    public ResponseEntity<Void> receive(@RequestBody List<Gps> gpses) {
         //Todo: step2. 주기 데이터를 전달받음
+
+        for(Gps gps : gpses) {
+            System.out.printf("(%d, %d) \t", gps.getLatitude(), gps.getLongitude());
+        }
+
+        System.out.println();
+
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/off/{emulatorId}")
