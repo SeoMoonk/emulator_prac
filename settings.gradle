@@ -1,4 +1,4 @@
 rootProject.name = 'pickcarprac'
 
 include 'module-emulator'
-include 'module-scheduler'
+include 'module-gps'
