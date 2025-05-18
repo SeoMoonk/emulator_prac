@@ -1,5 +1,5 @@
 rootProject.name = 'pickcarprac'
 
 include 'module-emulator'
-include 'module-gps'
-include 'module-recieve'
+include 'module-server'
+include 'module-receive-server'

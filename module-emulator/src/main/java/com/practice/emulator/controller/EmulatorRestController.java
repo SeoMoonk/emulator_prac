@@ -1,14 +1,14 @@
 package com.practice.emulator.controller;
 
-import com.practice.emulator.model.entity.Gps;
 import com.practice.emulator.service.EmulatorService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
@@ -18,6 +18,7 @@ public class EmulatorRestController {
 
     private final EmulatorService emulatorService;
 
+    //1. 애뮬레이터를 on 상태로 만듬
     @PostMapping("/on/{emulatorId}")
     public ResponseEntity<String> on(@PathVariable(value = "emulatorId") Long emulatorId, HttpServletRequest request) {
         log.info("On => input emulatorId: {}", emulatorId);
@@ -25,24 +26,14 @@ public class EmulatorRestController {
         return ResponseEntity.ok("%d번 애뮬레이터가 동작하기 시작합니다.".formatted(emulatorId));
     }
 
-    @PostMapping("/receive")
-    public ResponseEntity<Void> receive(@RequestBody List<Gps> gpses) {
-        //Todo: step2. 주기 데이터를 전달받음
 
-        for(Gps gps : gpses) {
-            System.out.printf("(%.6f, %.6f) \t", gps.getLatitude(), gps.getLongitude());
-        }
-
-        System.out.println();
-
-        return ResponseEntity.noContent().build();
-    }
-
+    //3. 애뮬레이터를 off 상태로 만듬
     @PostMapping("/off/{emulatorId}")
     public ResponseEntity<String> off(@PathVariable(value = "emulatorId") Long emulatorId) {
         log.info("Off => input emulatorId: {}", emulatorId);
         emulatorService.turnOff(emulatorId);
-        //todo: 스케줄러 중단
+
+        //todo : 수신 서버에게 지금까지의 남은 데이터를 마저 저장하도록 요청
 
         return ResponseEntity.ok("%d번 애뮬레이터가 종료되었습니다.".formatted(emulatorId));
     }
