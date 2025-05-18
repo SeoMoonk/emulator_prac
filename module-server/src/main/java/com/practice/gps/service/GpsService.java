@@ -13,6 +13,10 @@ import java.util.Queue;
 @RequiredArgsConstructor
 public class GpsService {
 
+    public GpsService(GpsRepository gpsRepository) {
+        this.gpsRepository = gpsRepository;
+    }
+
     private final GpsRepository gpsRepository;
 
     @Transactional

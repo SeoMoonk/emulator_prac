@@ -1,7 +1,7 @@
 package com.practice.receiver.service;
 
-import com.practice.gps.model.dto.request.GpsDataRequest;
 import com.practice.gps.model.entity.Gps;
+import com.practice.receiver.model.dto.request.GpsDataRequest;
 import com.practice.receiver.repository.InMemoryGpsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

@@ -1,7 +1,7 @@
 package com.practice.emulator.scheduler;
 
+import com.practice.emulator.model.dto.request.GpsDataRequest;
 import com.practice.emulator.service.EmulatorService;
-import com.practice.gps.model.dto.request.GpsDataRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
