@@ -27,7 +27,7 @@ public class ReceiverService {
         }
     }
 
-    public void sendToMain(Long emulatorId, Queue<Gps> current) {
+    private void sendToMain(Long emulatorId, Queue<Gps> current) {
         restClient.post()
                 .uri("http://localhost:8082/api/v1/gps/save")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -36,5 +36,10 @@ public class ReceiverService {
                 .toBodilessEntity();
 
         inMemoryGpsRepository.clearById(emulatorId);
+    }
+
+    public void sendByOffCall(Long emulatorId) {
+        Queue<Gps> queue = inMemoryGpsRepository.findById(emulatorId);
+        sendToMain(emulatorId, queue);
     }
 }

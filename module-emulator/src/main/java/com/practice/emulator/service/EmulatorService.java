@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Slf4j
 public class EmulatorService {
 
+    private final RestClient restClient = RestClient.create();
     private final EmulatorRepository emulatorRepository;
 
     @Transactional
@@ -33,6 +35,12 @@ public class EmulatorService {
     public void turnOff(Long emulatorId) {
         Emulator emulator = getById(emulatorId);
         emulator.turnOff(emulator);
+
+        //todo : 수신 서버에게 지금까지의 남은 데이터를 마저 저장하도록 요청
+        restClient.post()
+                .uri("http://localhost:8081/api/v1/reciever/off-save/" + emulatorId)
+                .retrieve()
+                .toBodilessEntity();
     }
 
     private Emulator getById(Long emulatorId) {

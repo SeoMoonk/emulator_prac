@@ -32,9 +32,6 @@ public class EmulatorRestController {
     public ResponseEntity<String> off(@PathVariable(value = "emulatorId") Long emulatorId) {
         log.info("Off => input emulatorId: {}", emulatorId);
         emulatorService.turnOff(emulatorId);
-
-        //todo : 수신 서버에게 지금까지의 남은 데이터를 마저 저장하도록 요청
-
         return ResponseEntity.ok("%d번 애뮬레이터가 종료되었습니다.".formatted(emulatorId));
     }
 }
