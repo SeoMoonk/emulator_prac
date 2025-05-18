@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: secret
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: # mysql url
+    username: # mysql username
+    password: # mysql password
+  jpa:
+    hibernate:
+      ddl-auto: create
+server:
+  port: 8082
